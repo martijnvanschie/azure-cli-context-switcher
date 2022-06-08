@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azure.Cli.ContextSwitcher", "Azure.Cli.ContextSwitcher\Azure.Cli.ContextSwitcher.csproj", "{84248ACB-AD5E-410F-8401-A7819EE9DB4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{45E424EC-0A7D-4C72-B60E-B18E6689549B}"
+	ProjectSection(SolutionItems) = preProject
+		..\publish-cli.ps1 = ..\publish-cli.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{818F89A2-C886-476C-A2C7-4D6B70FB55AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{B55E635F-1DD1-4740-A76D-EE0475FDE17C}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\ci.yml = ..\.github\workflows\ci.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84248ACB-AD5E-410F-8401-A7819EE9DB4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84248ACB-AD5E-410F-8401-A7819EE9DB4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84248ACB-AD5E-410F-8401-A7819EE9DB4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84248ACB-AD5E-410F-8401-A7819EE9DB4E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B55E635F-1DD1-4740-A76D-EE0475FDE17C} = {818F89A2-C886-476C-A2C7-4D6B70FB55AB}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {76B280E4-1479-48FB-A572-221137B3CEF2}
+	EndGlobalSection
+EndGlobal
