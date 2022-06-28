@@ -9,7 +9,6 @@ namespace Azure.Cli.ContextSwitcher.Helpers
     /// </summary>
     internal class Utilities
     {
-
         public static void TestCommand()
         {
             StringBuilder command = new StringBuilder();
