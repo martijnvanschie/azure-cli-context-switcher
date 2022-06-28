@@ -10,8 +10,8 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config.Tenants
     {
         public ConfigTenantsRootCommands(string? description = "Manage users in the configuration") : base("tenants", description)
         {
-            AddCommand(new ListTenantsCommand("List all the tenants in the configuration."));
             AddCommand(new AddTenantCommand("Add a new tenant to the configuration."));
+            AddCommand(new ListTenantsCommand("List all the tenants in the configuration."));
         }
     }
 }

@@ -13,14 +13,14 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config.Users
             name.IsRequired = true;
             AddOption(name);
 
+            var userType = new Option<LoginType>("--type", () => LoginType.Interactive, "Define the type of login this user represents.");
+            userType.AddAlias("-t");
+            AddOption(userType);
+
             var friendlyName = new Option<string>("--friendly-name", "Define the type of login this user represents.");
             friendlyName.AddAlias("-fn");
             friendlyName.IsRequired = false;
             AddOption(friendlyName);
-
-            var userType = new Option<LoginType>("--type", () => LoginType.Interactive, "Define the type of login this user represents.");
-            userType.AddAlias("-t");
-            AddOption(userType);
 
             this.SetHandler((configFile, entryName, userType, friendlyName) =>
             {
@@ -32,7 +32,7 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config.Users
 
                     AzureCliContextManager.WriteConfig(content);
 
-                    AnsiConsole.MarkupLine($"[lightgoldenrod2_1]User {entryName} was added.[/]");
+                    AnsiConsole.MarkupLine($"[lightgoldenrod2_1]User {entryName} was added to the configuration.[/]");
                 }
                 catch (ContextConfigurationException ex)
                 {
