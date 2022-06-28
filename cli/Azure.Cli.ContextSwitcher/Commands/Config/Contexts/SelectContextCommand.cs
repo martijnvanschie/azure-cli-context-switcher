@@ -64,7 +64,7 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config.Contexts
             switch (user.LoginType)
             {
                 case LoginType.Interactive:
-                    Utilities.LoginInteractive();
+                    Utilities.LoginInteractive(tenant);
                     break;
                 case LoginType.ServicePrincipal:
                     Utilities.LoginServicePrincipal(tenant, user);

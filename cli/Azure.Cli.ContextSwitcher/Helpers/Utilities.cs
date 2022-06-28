@@ -19,10 +19,10 @@ namespace Azure.Cli.ContextSwitcher.Helpers
         }
 
 
-        public static void LoginInteractive(string output = "none")
+        public static void LoginInteractive(Tenant tenant, string output = "none")
         {
             StringBuilder command = new StringBuilder();
-            command.AppendLine(@$"az login -o {output}");
+            command.AppendLine(@$"az login --tenant {tenant.TenantId} -o {output}");
             command.AppendLine("az account show --query user");
 
             ExecutePowershellCommand(command.ToString());
@@ -37,9 +37,9 @@ namespace Azure.Cli.ContextSwitcher.Helpers
             ExecutePowershellCommand(command.ToString());
         }
 
-        public static void LoginUsernamePassword(Tenant tenant, User user)
+        public static void LoginUsernamePassword(Tenant tenant, User user, string output = "none")
         {
-            var psCommmand = @$"az login -u {user.Username} -p {user.Password}";
+            var psCommmand = @$"az login -u {user.Username} -p {user.Password} --tenant {tenant.TenantId} -o {output}";
             ExecutePowershellCommand(psCommmand);
         }
 
