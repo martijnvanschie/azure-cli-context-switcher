@@ -13,7 +13,6 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config
 
             AddCommand(new ConfigTenantsRootCommands());
             AddCommand(new ConfigUsersRootCommands());
-            AddCommand(new ConfigContextsRootCommands());
         }
     }
 }

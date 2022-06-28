@@ -8,11 +8,14 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config
     {
         public ViewConfigCommand(string? description = null) : base("view", description)
         {
-            this.SetHandler((string test) =>
+            this.SetHandler((string configName) =>
             {
-                AnsiConsole.MarkupLine($"Using context name [lightgoldenrod2_1]{test}[/]");
+                AnsiConsole.MarkupLine($"Context: [lightgoldenrod2_1]{configName}[/]");
 
-                var content = AzureCliContextManager.ReadConfigAsString(test);
+                var path = AzureCliContextManager.GetConfigFile(configName);
+                AnsiConsole.MarkupLine($"Path: [lightgoldenrod2_1]{path}[/]");
+
+                var content = AzureCliContextManager.ReadConfigAsString(configName);
                 AnsiConsole.MarkupLine($"[lightgoldenrod2_1]{content}[/]");
             },
             _configFile);

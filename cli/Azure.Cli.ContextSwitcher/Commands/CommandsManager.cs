@@ -4,6 +4,8 @@ using System.CommandLine;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Azure.Cli.ContextSwitcher.Commands.Config;
+using Azure.Cli.ContextSwitcher.Commands.Config.Contexts;
 
 namespace Azure.Cli.ContextSwitcher.Commands
 {
@@ -16,7 +18,8 @@ namespace Azure.Cli.ContextSwitcher.Commands
             RootCommand = new RootCommand();
             RootCommand.Description = "Azure Context Switcher v0.1";
 
-            RootCommand.AddCommand(new Config.ConfigRootCommands());
+            RootCommand.AddCommand(new ConfigRootCommands());
+            RootCommand.AddCommand(new ConfigContextsRootCommands());
         }
 
         internal void Invoke(string[] args)
