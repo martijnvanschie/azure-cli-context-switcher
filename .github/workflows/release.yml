@@ -111,4 +111,28 @@ jobs:
         uses: actions/upload-artifact@v3.0.0
         with:
           name: cli
-          path: "*.zip"          
+          path: "*.zip"
+
+  release-cli:
+    name: Release the cli
+    runs-on: ubuntu-latest
+    needs: [create_release_version, build_artifacts]
+
+    steps:
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v3.0.0
+      with:
+        name: cli
+
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "*.zip"
+        name: Release v${{ needs.create_release_version.outputs.version-package }}
+        body: |
+          # Release notes
+          
+          v${{ needs.create_release_version.outputs.version-package }} of Azure CLI Context Switcher
+        tag: v${{ needs.create_release_version.outputs.version-package }}
+        allowUpdates: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+        prerelease: true
