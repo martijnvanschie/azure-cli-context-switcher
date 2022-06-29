@@ -1,0 +1,48 @@
+name: Create release based on tag
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  create_release_version:
+    name: Extract tag and create release
+    runs-on: ubuntu-latest
+
+    outputs:
+      version-assembly: ${{ steps.output-params.outputs.version-assembly }}
+      version-file: ${{ steps.output-params.outputs.version-file }}
+      version-informational: ${{ steps.output-params.outputs.version-informational }}
+      version-package: ${{ steps.output-params.outputs.version-package }}
+      buildnumber: ${{ steps.output-params.outputs.buildnumber }}
+
+    env:
+      VERBOSE: 'true'
+
+    steps:
+      - name: Checkout the source code
+        uses: actions/checkout@v2.4.2
+
+      - name: Query for latest tag
+        id: querytag
+        uses: jimschubert/query-tag-action@v2
+        with:
+          include: 'v*'
+          #exclude: '*-rc*'
+          commit-ish: 'HEAD'
+
+      - name: Get version from tag
+        id: dotnet-versions
+        uses: martijnvanschie/github-actions/get-dotnet-versions@v1.0.0-rc.1
+        with: 
+          version: ${{ steps.querytag.outputs.tag }}
+
+      - name: Set output parameters
+        id: output-params
+        shell: bash
+        run: |
+          echo "::set-output name=version-assembly::${{ steps.dotnet-versions.outputs.version-assembly }}"
+          echo "::set-output name=version-file::${{ steps.dotnet-versions.outputs.version-file }}"
+          echo "::set-output name=version-informational::${{ steps.dotnet-versions.outputs.version-informational }}"
+          echo "::set-output name=version-package::${{ steps.dotnet-versions.outputs.version-package }}"
+          echo "::set-output name=buildnumber::${{ steps.dotnet-versions.outputs.buildnumber }}" 
