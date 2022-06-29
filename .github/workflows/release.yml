@@ -51,6 +51,12 @@ jobs:
     name: Build and publish artifacts
     needs: create_release_version
     runs-on: windows-latest
+    strategy:
+      matrix:
+        include:
+          - runtime: "win-x64"
+            selfContained: "--no-self-contained"
+            publishFolder: "win-x64"  
 
     env:
       SINGLE_FILE: "true"
@@ -87,4 +93,22 @@ jobs:
       - name: Print project file
         run: |
           cd ..
-          cat '${{ env.PROJECT_FILE }}'          
+          cat '${{ env.PROJECT_FILE }}'
+
+      - name: Publish
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          cd Azure.Cli.ContextSwitcher
+          dotnet publish --runtime ${{ matrix.runtime }} --configuration Release ${{ matrix.selfContained }} --output ../../publish/${{ matrix.publishFolder }}
+      - name: Zip Release
+        uses: TheDoctor0/zip-release@0.6.1
+        with:
+          path: publish/${{ matrix.publishFolder }}
+          filename: azctx-${{ matrix.publishFolder }}-${{ needs.create_release_version.outputs.version-package }}.zip 
+
+      - name: Upload a Build Artifact
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: cli
+          path: "*.zip"          
