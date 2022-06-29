@@ -76,14 +76,14 @@ jobs:
 
       - name: Get version from tag
         id: dotnet-versions
-        uses: martijnvanschie/github-actions/apply-dotnet-version@v1.0.0-rc.1
+        uses: martijnvanschie/github-actions/apply-dotnet-version@v1.0.0-rc.2
         with: 
           version-assembly: '${{ needs.create_release_version.outputs.version-assembly }}'
           version-file: '${{ needs.create_release_version.outputs.version-file }}'
           version-informational: '${{ needs.create_release_version.outputs.version-informational }}'
           version-package: '${{ needs.create_release_version.outputs.version-package }}'
           projectFile: '${{ env.PROJECT_FILE }}'
-          
+
       - name: Print project file
         run: |
           cd ..
