@@ -46,3 +46,45 @@ jobs:
           echo "::set-output name=version-informational::${{ steps.dotnet-versions.outputs.version-informational }}"
           echo "::set-output name=version-package::${{ steps.dotnet-versions.outputs.version-package }}"
           echo "::set-output name=buildnumber::${{ steps.dotnet-versions.outputs.buildnumber }}" 
+
+  build_artifacts:
+    name: Build and publish artifacts
+    needs: create_release_version
+    runs-on: windows-latest
+
+    env:
+      SINGLE_FILE: "true"
+      PROJECT_FILE: "cli/Azure.Cli.ContextSwitcher/Azure.Cli.ContextSwitcher.csproj"
+
+    defaults:
+      run:
+        working-directory: ./cli
+
+    steps:
+      - name: Checkout the source code
+        uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Restore dependencies
+        run: |
+          dotnet nuget add source --username martijnvanschie --password ${{ secrets.NUGET_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/martijnvanschie/index.json"
+          dotnet restore
+
+      - name: Get version from tag
+        id: dotnet-versions
+        uses: martijnvanschie/github-actions/apply-dotnet-version@v1.0.0-rc.1
+        with: 
+          version-assembly: '${{ needs.create_release_version.outputs.version-assembly }}'
+          version-file: '${{ needs.create_release_version.outputs.version-file }}'
+          version-informational: '${{ needs.create_release_version.outputs.version-informational }}'
+          version-package: '${{ needs.create_release_version.outputs.version-package }}'
+          projectFile: '${{ env.PROJECT_FILE }}'
+          
+      - name: Print project file
+        run: |
+          cd ..
+          cat '${{ env.PROJECT_FILE }}'          
