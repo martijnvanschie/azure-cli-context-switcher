@@ -2,13 +2,14 @@
 using System.CommandLine;
 using Azure.Cli.ContextSwitcher.Model;
 using Azure.Cli.ContextSwitcher.Helpers;
+using Azure.Cli.ContextSwitcher.Commands.Config;
 
-namespace Azure.Cli.ContextSwitcher.Commands.Config.Contexts
+namespace Azure.Cli.ContextSwitcher.Commands.Contexts
 {
     internal class SelectContextCommand : ConfigCommandBase
     {
-        const string CHOICE_CANCEL = "cancel";
-        private AzureCliContext _config;
+        const string CHOICE_CANCEL = "(cancel)";
+        private AzureCliContext? _config;
 
         public SelectContextCommand(string? description = null) : base("select", description)
         {
@@ -17,10 +18,10 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config.Contexts
                 _config = AzureCliContextManager.ReadConfig(configFile);
 
                 var selection = new SelectionPrompt<string>()
-                        .Title("Please select the [green]context[/]?")
+                        .Title("Select the context you want to login to...")
                         .PageSize(10)
                         .MoreChoicesText("[grey](Move up and down to reveal more fruits)[/]")
-                        .AddChoiceGroup("Available Context", _config.Contexts.Select(c => c.Key).ToArray())
+                        .AddChoices(_config.Contexts.Select(c => c.Key).ToArray())
                         .AddChoices(CHOICE_CANCEL);
 
                 var context = AnsiConsole.Prompt(selection);

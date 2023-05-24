@@ -1,5 +1,4 @@
-﻿using Azure.Cli.ContextSwitcher.Commands.Config.Contexts;
-using Azure.Cli.ContextSwitcher.Commands.Config.Tenants;
+﻿using Azure.Cli.ContextSwitcher.Commands.Config.Tenants;
 using Azure.Cli.ContextSwitcher.Commands.Config.Users;
 
 namespace Azure.Cli.ContextSwitcher.Commands.Config

@@ -9,16 +9,6 @@ namespace Azure.Cli.ContextSwitcher.Helpers
     /// </summary>
     internal class Utilities
     {
-        public static void TestCommand()
-        {
-            StringBuilder command = new StringBuilder();
-            command.AppendLine("az version");
-            command.AppendLine("az account list -o table");
-
-            ExecutePowershellCommand(command.ToString());
-        }
-
-
         public static void LoginInteractive(Tenant tenant, string output = "none")
         {
             StringBuilder command = new StringBuilder();

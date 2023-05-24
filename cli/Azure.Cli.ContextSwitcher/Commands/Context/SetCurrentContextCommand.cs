@@ -2,12 +2,13 @@
 using System.CommandLine;
 using Azure.Cli.ContextSwitcher.Model;
 using Azure.Cli.ContextSwitcher.Helpers;
+using Azure.Cli.ContextSwitcher.Commands.Config;
 
-namespace Azure.Cli.ContextSwitcher.Commands.Config.Contexts
+namespace Azure.Cli.ContextSwitcher.Commands.Contexts
 {
     internal class SetCurrentContextCommand : ConfigCommandBase
     {
-        private AzureCliContext _config;
+        private AzureCliContext? _config;
 
         Option<string> _context = new Option<string>("--context", "The name of the context used to perform the login.");
 

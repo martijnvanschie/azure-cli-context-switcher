@@ -22,12 +22,12 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config.Users
                     // Add some columns
                     table.AddColumn($"[{Color.LightGoldenrod2_1}]Name[/]");
                     table.AddColumn($"[{Color.LightGoldenrod2_1}]Friendly Name[/]");
-                    table.AddColumn($"[{Color.LightGoldenrod2_1}]Username[/]");
                     table.AddColumn($"[{Color.LightGoldenrod2_1}]Login Type[/]");
+                    table.AddColumn($"[{Color.LightGoldenrod2_1}]Username[/]");
 
                     foreach (var item in content.Users)
                     {
-                        table.AddRow(item.Key, item.Value.DisplayName, item.Value.Username ?? $"[{Color.Grey}]n.a.[/]", item.Value.LoginType.ToString());
+                        table.AddRow(item.Key, item.Value.DisplayName, item.Value.LoginType.ToString(), item.Value.Username ?? $"[{Color.Grey}]n.a.[/]");
                     }
 
                     // Render the table to the console

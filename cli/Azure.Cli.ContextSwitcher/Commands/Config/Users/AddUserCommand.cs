@@ -28,9 +28,9 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config.Users
                 {
                     var content = AzureCliContextManager.ReadConfig(configFile);
 
-                    content.AddUser(entryName, friendlyName: friendlyName);
+                    content.AddUser(entryName, userType, friendlyName: friendlyName);
 
-                    AzureCliContextManager.WriteConfig(content);
+                    AzureCliContextManager.WriteConfig(content, configFile);
 
                     AnsiConsole.MarkupLine($"[lightgoldenrod2_1]User {entryName} was added to the configuration.[/]");
                 }

@@ -1,5 +1,7 @@
 # Azure CLI Context Switcher
 
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/martijnvanschie/azure-cli-context-switcher?label=Latest%20Release&logo=github) ![GitHub Release Date](https://img.shields.io/github/release-date/martijnvanschie/azure-cli-context-switcher?logo=github) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/martijnvanschie/azure-cli-context-switcher/Continues%20Integration?label=CI%20build&logo=github)
+
 ## What is the Azure CLI Context Switcher?
 
 It's an CLI tool to switch between Azure CLI login's in a similar was as `kubectl config set-context`.

@@ -1,8 +1,9 @@
 ﻿using Spectre.Console;
 using System.CommandLine;
 using Azure.Cli.ContextSwitcher.Model;
+using Azure.Cli.ContextSwitcher.Commands.Config;
 
-namespace Azure.Cli.ContextSwitcher.Commands.Config.Contexts
+namespace Azure.Cli.ContextSwitcher.Commands.Contexts
 {
     internal class ListContextsCommand : ConfigCommandBase
     {
@@ -17,7 +18,7 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config.Contexts
                     // Create a table
                     var table = new Table();
                     table.Border = TableBorder.Ascii2;
-                    table.Title = new TableTitle($"[{Color.Aqua}]Users for config [[{configFile}]][/]");
+                    table.Title = new TableTitle($"[{Color.Aqua}]Contexts based on config [[{configFile}]][/]");
 
                     // Add some columns
                     table.AddColumn($"[{Color.LightGoldenrod2_1}]Name[/]");
