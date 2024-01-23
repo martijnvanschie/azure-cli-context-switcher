@@ -8,7 +8,7 @@ $singlefile = "true"
 
 dotnet publish `
     .\cli\Azure.Cli.ContextSwitcher\Azure.Cli.ContextSwitcher.csproj `
-    -p:PublishSingleFile=$singlefile `
+    -p:PublishSingleFile=$singlefile,AssemblyName=azctxtst `
     --output $publishingfolder `
     --runtime win-x64 `
     --configuration "Release" `

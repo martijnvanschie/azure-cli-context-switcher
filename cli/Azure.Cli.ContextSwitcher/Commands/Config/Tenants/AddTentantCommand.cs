@@ -36,7 +36,7 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config.Tenants
 
                     config.AddTenant(name, tenantId, friendlyName);
 
-                    AzureCliContextManager.WriteConfig(config);
+                    AzureCliContextManager.WriteConfig(config, configFile);
 
                     AnsiConsole.MarkupLine($"[lightgoldenrod2_1]Tentant {name} was added to the config.[/]");
                 }

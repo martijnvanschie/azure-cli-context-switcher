@@ -39,8 +39,8 @@
                     Users.Add(name, new User(friendlyName ?? name));
                     break;
                 case LoginType.ServicePrincipal:
-                    break;
                 case LoginType.UsernamePassword:
+                    Users.Add(name, new User(friendlyName ?? name, type, username, password));
                     break;
                 default:
                     break;
