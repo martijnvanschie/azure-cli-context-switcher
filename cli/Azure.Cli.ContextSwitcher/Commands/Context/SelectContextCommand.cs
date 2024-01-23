@@ -26,7 +26,7 @@ namespace Azure.Cli.ContextSwitcher.Commands.Contexts
 
                 var context = AnsiConsole.Prompt(selection);
 
-                AnsiConsole.WriteLine($"Using context [{context}]");
+                AnsiConsole.WriteLine($"User selection: [{context}]");
 
                 if (context.Equals(CHOICE_CANCEL))
                 {
