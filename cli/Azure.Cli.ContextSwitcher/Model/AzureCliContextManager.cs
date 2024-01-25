@@ -4,7 +4,7 @@ namespace Azure.Cli.ContextSwitcher.Model
 {
     internal class AzureCliContextManager
     {
-        private const string APP_FOLDER = ".azplus";
+        private const string APP_FOLDER = ".azctx";
         public const string DEFAULT_CONFIG_NAME = "config";
 
         internal static AzureCliContext ReadConfig(string? path = null)
