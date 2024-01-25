@@ -7,9 +7,8 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config
     {
         public ConfigRootCommands(string? description = "Manage resource groups") : base("config", description)
         {
+            AddCommand(new InitConfigCommand("Initialize a default azctx config file."));
             AddCommand(new ViewConfigCommand("View the current configuration"));
-            AddCommand(new CreateDefaultConfigCommand("Create a default cli config file."));
-
             AddCommand(new ConfigTenantsRootCommands());
             AddCommand(new ConfigUsersRootCommands());
         }

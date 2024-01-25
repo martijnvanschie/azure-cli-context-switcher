@@ -4,9 +4,9 @@ using Azure.Cli.ContextSwitcher.Model;
 
 namespace Azure.Cli.ContextSwitcher.Commands.Config
 {
-    internal class CreateDefaultConfigCommand : ConfigCommandBase
+    internal class InitConfigCommand : ConfigCommandBase
     {
-        public CreateDefaultConfigCommand(string? description = null) : base("create", description)
+        public InitConfigCommand(string? description = null) : base("init", description)
         {
             this.SetHandler((string configFile) =>
             {
@@ -22,12 +22,12 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config
 
                 if (writeFile)
                 {
-                    AnsiConsole.MarkupLine($"[lightgoldenrod2_1]Writing file[/]");
                     AzureCliContextManager.WriteConfig(AzureCliContext.CreateDefault(), configFile);
+                    AnsiConsole.MarkupLine($"[green]Config file {content.FullName} initialized.[/]");
                     return;
                 }
 
-                AnsiConsole.MarkupLine($"[lightgoldenrod2_1]Skipping file file[/]");
+                AnsiConsole.MarkupLine($"[lightgoldenrod2_1]Skipping init of file {content.FullName}[/]");
             },
             _configFile);
         }
