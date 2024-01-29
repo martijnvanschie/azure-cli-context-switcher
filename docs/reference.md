@@ -4,6 +4,9 @@
 
 The `azctx` command is the main CLI command.
 
+> [!IMPORTANT]  
+> This reference is for release v1.0.0-beta.3.
+
 ### Command status
 
 There are three status types for commands. both commands and sub-commands have this indication.
@@ -18,3 +21,4 @@ There are three status types for commands. both commands and sub-commands have t
 |----------|---------------|-------|
 | [azctx config](commands/config.md) | Manage the configuration | Preview |
 | azctx context | Manage the Azure CLI login contact | Preview |
+

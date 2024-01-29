@@ -12,6 +12,9 @@ It replaced the need to remember, or keep track of your tenant id's, service pri
 
 Check out the [reference](docs/reference.md) documentation for more information.
 
+> [!NOTE]   
+> The reference section is under construction and undergoing changes.
+
 ## Resources
 
 [Sign in with Azure CLI](https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli)
