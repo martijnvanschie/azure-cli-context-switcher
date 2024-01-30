@@ -11,7 +11,7 @@ Allows you you manage user entries in the azctx configuration by adding, listing
 | Name   | Description      | Status | Available since |
 |----------|---------------|-------|-----|
 | azctx config users add | Add a user entry to the configuration file | Experimental | 1.0 |
-| azctx config users add-prompt | Add a user entry to the configuration file using an interactive prompt | Preview | 1.0.1 |
+| [azctx config users add-prompt](#azctx-config-users-add-prompt) | Add a user entry to the configuration file using an interactive prompt | Preview | 1.0.1 |
 | azctx config users list | List all the users in the configuration | GA | 1.0 |
 
 ## azctx config users add-prompt
@@ -33,11 +33,6 @@ Add a new user to the specified configuration.
 ```cli
 azctx config users add-prompt --cliconfig demo
 ```
-
-> [!IMPORTANT]  
-> ```cli
-> azctx config users add=prompt --cliconfig demo
-> ```
 
 ### Required Parameters
 
