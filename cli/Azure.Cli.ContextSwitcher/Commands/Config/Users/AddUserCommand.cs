@@ -1,6 +1,7 @@
 ﻿using Spectre.Console;
 using System.CommandLine;
 using Azure.Cli.ContextSwitcher.Model;
+using Microsoft.VisualBasic;
 
 namespace Azure.Cli.ContextSwitcher.Commands.Config.Users
 {

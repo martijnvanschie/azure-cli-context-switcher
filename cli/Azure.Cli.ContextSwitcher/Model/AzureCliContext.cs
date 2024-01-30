@@ -28,19 +28,20 @@
 
         public void AddUser(string name, LoginType type = LoginType.Interactive, string? friendlyName = null, string? username = null, string? password = null)
         {
-            if (Users.ContainsKey(name))
+            var key = name.ToLower().Replace(" ", "-");
+            if (Users.ContainsKey(key))
             {
-                throw new ContextConfigurationException($"A user with the name [{name}] is already configured. Duplicate names not supported.");
+                throw new ContextConfigurationException($"A user with the key [{key}] is already configured. Duplicate key names not supported.");
             }
 
             switch (type)
             {
                 case LoginType.Interactive:
-                    Users.Add(name, new User(friendlyName ?? name));
+                    Users.Add(key, new User(friendlyName ?? name));
                     break;
                 case LoginType.ServicePrincipal:
                 case LoginType.UsernamePassword:
-                    Users.Add(name, new User(friendlyName ?? name, type, username, password));
+                    Users.Add(key, new User(friendlyName ?? name, type, username, password));
                     break;
                 default:
                     break;
