@@ -4,9 +4,10 @@
 
 Create a default configuration file in the users profile folder under the subfolder `.azctx`.
 
-It resolved to one of the following folders:  
-*  `[%UserProfile%]\.azctx`
-*  `[%SystemDrive%]\Users\{username}\.azctx`
+It resolved to one of the following folders:
+
+* `[%UserProfile%]\.azctx`
+* `[%SystemDrive%]\Users\{username}\.azctx`
 
 ## Content
 
@@ -25,12 +26,12 @@ It resolved to one of the following folders:
 
 | Field | Description | Type |
 |------|-------------|------|
-| Tenants | Type | `Array` of [`tenant`](#tentant) items | 
-| Users | Type | `Array` of [`user`](#user) items | 
-| Contexts | Type | `Array` of [`context`](#context) items | 
-| CurrentContext | Type | `string` | 
+| Tenants | Type | `Array` of [`tenant`](#tenant) items |
+| Users | Type | `Array` of [`user`](#user) items |
+| Contexts | Type | `Array` of [`context`](#context) items |
+| CurrentContext | Type | `string` |
 
-### Tentant
+### Tenant
 
 Tenant holds the information of the tenant the users wants to login to.
 

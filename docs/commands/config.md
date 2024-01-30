@@ -19,9 +19,10 @@ Allows you you manage the azctx configuration by adding, listing and viewing con
 
 Create a default configuration file in the users profile folder under the subfolder `.azctx`.
 
-It resolved to one of the following folders:  
-*  `[%UserProfile%]\.azctx`
-*  `[%SystemDrive%]\Users\{username}\.azctx`
+It resolved to one of the following folders:
+
+* `[%UserProfile%]\.azctx`
+* `[%SystemDrive%]\Users\{username}\.azctx`
 
 The name of the configuration file can be overridden by providing the optional parameter `--cliconfig`.
 
@@ -51,12 +52,12 @@ Displays the content of the configuration file. It also displays the folder of t
 azctx config view
 ```
 
-### Required Parameters
+### Required parameters
 
 This command has no required parameters
 
 ### Optional parameters
 
-`--cliconfig | -c`
+`--cliconfig -c`
 
 The name of the configuration file to use. The default name is `config`.
