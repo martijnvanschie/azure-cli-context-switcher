@@ -99,7 +99,7 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         run: |
           cd Azure.Cli.ContextSwitcher
-          dotnet publish --runtime ${{ matrix.runtime }} --configuration Release ${{ matrix.selfContained }} --output ../../publish/${{ matrix.publishFolder }}
+          dotnet publish --runtime ${{ matrix.runtime }} --configuration Release -p:PublishSingleFile=true ${{ matrix.selfContained }} --output ../../publish/${{ matrix.publishFolder }}
       - name: Zip Release
         uses: TheDoctor0/zip-release@0.6.1
         with:
