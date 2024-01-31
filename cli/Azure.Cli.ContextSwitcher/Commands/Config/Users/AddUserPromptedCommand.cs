@@ -26,7 +26,7 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config.Users
                                 .AddChoices(LoginType.Interactive, LoginType.ServicePrincipal, LoginType.UsernamePassword)
                                 );
 
-                    AnsiConsole.MarkupLine("A user entry requires a unique ID used as the key to identity this user in the config.");
+                    AnsiConsole.MarkupLine("A user entry requires a unique name used as the key to identity this user in the config.");
                     AnsiConsole.MarkupLine("[green]Allowed characters. Input will be formatted according.[/]");
                     AnsiConsole.MarkupLine("- Alphanumeric lowercase [yellow][[a-z]][/]");
                     AnsiConsole.MarkupLine("- Special characters [yellow]-_+[/]");

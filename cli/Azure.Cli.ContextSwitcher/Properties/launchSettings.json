@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Azure.Cli.ContextSwitcher": {
+      "commandName": "Project",
+      "commandLineArgs": "config tenants add-prompt"
+    }
+  }
+}

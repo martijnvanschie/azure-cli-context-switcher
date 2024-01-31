@@ -12,12 +12,13 @@
 
         internal void AddTenant(string name, string tenantId, string? friendlyName = null)
         {
-            if (Tenants.ContainsKey(name))
+            var key = name.ToLower().Replace(" ", "-");
+            if (Tenants.ContainsKey(key))
             {
-                throw new ContextConfigurationException($"A tenant with the name [{name}] is already configured. Duplicate names not supported.");
+                throw new ContextConfigurationException($"A tenant with the key [{key}] is already configured. Duplicate key names are not supported.");
             }
 
-            Tenants.Add(name,
+            Tenants.Add(key,
                 new Tenant()
                     {
                         Name = friendlyName ?? name,
@@ -41,7 +42,7 @@
                     break;
                 case LoginType.ServicePrincipal:
                 case LoginType.UsernamePassword:
-                    Users.Add(key, new User(friendlyName ?? name, type, username, password));
+                    Users.Add(key, new User(friendlyName ?? name, type, username!, password!));
                     break;
                 default:
                     break;

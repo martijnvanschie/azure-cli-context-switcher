@@ -48,4 +48,42 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config.Tenants
             _configFile, name, tenantId, friendlyName);
         }
     }
+
+    internal class AddTenantInteractiveCommand : ConfigCommandBase
+    {
+        public AddTenantInteractiveCommand(string? description = null) : base("add-prompt", description)
+        {
+            this.SetHandler((configFile) =>
+            {
+                try
+                {
+                    AnsiConsole.MarkupLine("A tenant entry requires a unique name used as the key to identity this tenant in the config.");
+                    AnsiConsole.MarkupLine("[green]Allowed characters. Input will be formatted according.[/]");
+                    AnsiConsole.MarkupLine("- Alphanumeric lowercase [yellow][[a-z]][/]");
+                    AnsiConsole.MarkupLine("- Special characters [yellow]-_+[/]");
+                    var uniqueName = AnsiConsole.Ask<string>("What's the [green]unique name[/] for this tenant?");
+
+                    AnsiConsole.WriteLine();
+                    AnsiConsole.MarkupLine("The display name is used as a descriptive. It is not used to for the login process.");
+                    var friendlyName = AnsiConsole.Ask<string>("What's the [green]display name[/] used for this entry.?");
+
+                    AnsiConsole.WriteLine();
+                    var tenantId = AnsiConsole.Ask<string>("What's the [green]tenant id[/] used for this entry.?");
+
+                    var config = AzureCliContextManager.ReadConfig(configFile);
+
+                    config.AddTenant(uniqueName, tenantId, friendlyName);
+
+                    AzureCliContextManager.WriteConfig(config, configFile);
+
+                    AnsiConsole.MarkupLine($"[lightgoldenrod2_1]Tentant {uniqueName} was added to the config.[/]");
+                }
+                catch (ContextConfigurationException ex)
+                {
+                    AnsiConsole.MarkupLine($"[{Color.Maroon}]{ex.Message.EscapeMarkup()}[/]");
+                }
+            },
+            _configFile);
+        }
+    }
 }
