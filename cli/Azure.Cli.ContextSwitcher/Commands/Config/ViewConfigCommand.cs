@@ -16,7 +16,7 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config
                 AnsiConsole.MarkupLine($"Path: [lightgoldenrod2_1]{path}[/]");
 
                 var content = AzureCliContextManager.ReadConfigAsString(configName);
-                AnsiConsole.MarkupLine($"[lightgoldenrod2_1]{content}[/]");
+                AnsiConsole.MarkupLineInterpolated($"[lightgoldenrod2_1]{content}[/]");
             },
             _configFile);
         }

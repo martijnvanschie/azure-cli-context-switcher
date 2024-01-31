@@ -26,7 +26,7 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config.Tenants
 
                     foreach (var item in content.Tenants)
                     {
-                        table.AddRow(item.Key, item.Value.Name, item.Value.TenantId ?? $"[{Color.Grey}]n.a.[/]");
+                        table.AddRow(item.Name, item.DirectoryName, item.TenantId ?? $"[{Color.Grey}]n.a.[/]");
                     }
 
                     // Render the table to the console

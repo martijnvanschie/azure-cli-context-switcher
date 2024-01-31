@@ -49,9 +49,11 @@ namespace Azure.Cli.ContextSwitcher.Commands.Contexts
 
                     table.AddRow("Context", context);
 
-                    if (_config.Tenants.TryGetValue(currentContext.Tenant, out Tenant? tenant))
+
+                    var tenant = _config.Tenants.FirstOrDefault(t => t.Name.Equals(currentContext.Tenant));
+                    if (tenant is not null)
                     {
-                        table.AddRow("Tenant Name", tenant.Name);
+                        table.AddRow("Tenant Name", tenant.DirectoryName);
                         table.AddRow("Tenant Id", tenant.TenantId);
                     }
 

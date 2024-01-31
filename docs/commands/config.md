@@ -12,8 +12,8 @@ Allows you you manage the azctx configuration by adding, listing and viewing con
 |----------|---------------|-------|-----|
 | [azctx config init](#azctx-config-init) | Initialize a default configuration file | GA | 1.0
 | [azctx config view](#azctx-config-view) | Show the details of the configuration | GA | 1.0
-| azctx config tenants | Manage the configuration | Preview | 1.0
-| azctx config users | Manage the configuration | Preview | 1.0
+| [azctx config tenants](config-tenants.md) | Manage the tenants in the configuration | Preview | 1.0
+| [azctx config users](config-users.md) | Manage the users in the configuration | Preview | 1.0
 
 ## azctx config init
 

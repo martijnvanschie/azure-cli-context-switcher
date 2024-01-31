@@ -59,7 +59,13 @@ namespace Azure.Cli.ContextSwitcher.Commands.Contexts
 
         private void PerformLogin(Context currentContext)
         {
-            var tenant = _config.Tenants[currentContext.Tenant];
+            var tenant = _config.Tenants.FirstOrDefault(t => t.Name.Equals(currentContext.Tenant));
+
+            if (tenant == null)
+            {
+                throw new ContextConfigurationException("");
+            }
+
             var user = _config.Users[currentContext.User];
 
             switch (user.LoginType)

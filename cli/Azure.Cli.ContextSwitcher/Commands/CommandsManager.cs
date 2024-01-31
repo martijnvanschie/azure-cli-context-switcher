@@ -11,7 +11,7 @@ namespace Azure.Cli.ContextSwitcher.Commands
         internal CommandsManager()
         {
             RootCommand = new RootCommand();
-            RootCommand.Description = "Azure Context Switcher v0.1";
+            RootCommand.Description = $"Welcome to the Azure Context Switcher CLI.\r\n\r\nUse azctx --version to display the current version.";
 
             RootCommand.AddCommand(new ConfigRootCommands());
             RootCommand.AddCommand(new ContextsRootCommands());

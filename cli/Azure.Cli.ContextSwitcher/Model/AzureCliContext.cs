@@ -2,7 +2,7 @@
 {
     internal class AzureCliContext
     {
-        public Dictionary<string, Tenant> Tenants { get; set; } = new Dictionary<string, Tenant>();
+        public List<Tenant> Tenants { get; set; } = new List<Tenant>();
 
         public Dictionary<string, User> Users { get; set; } = new Dictionary<string, User>();
 
@@ -12,18 +12,18 @@
 
         internal void AddTenant(string name, string tenantId, string? friendlyName = null)
         {
-            if (Tenants.ContainsKey(name))
+            var key = name.ToLower().Replace(" ", "-");
+            if (Tenants.Any(t => t.Name.Equals(key)))
             {
-                throw new ContextConfigurationException($"A tenant with the name [{name}] is already configured. Duplicate names not supported.");
+                throw new ContextConfigurationException($"A tenant with the key [{key}] is already configured. Duplicate key names are not supported.");
             }
 
-            Tenants.Add(name,
-                new Tenant()
-                    {
-                        Name = friendlyName ?? name,
-                        TenantId = tenantId
-                    }
-                );
+            Tenants.Add(new Tenant()
+                        {
+                            Name = key,
+                            DirectoryName = friendlyName ?? name,
+                            TenantId = tenantId
+                        });
         }
 
         public void AddUser(string name, LoginType type = LoginType.Interactive, string? friendlyName = null, string? username = null, string? password = null)
@@ -41,7 +41,7 @@
                     break;
                 case LoginType.ServicePrincipal:
                 case LoginType.UsernamePassword:
-                    Users.Add(key, new User(friendlyName ?? name, type, username, password));
+                    Users.Add(key, new User(friendlyName ?? name, type, username!, password!));
                     break;
                 default:
                     break;
