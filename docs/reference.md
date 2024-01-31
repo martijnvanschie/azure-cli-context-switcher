@@ -1,7 +1,7 @@
 # CLI Reference
 
 > [!IMPORTANT]  
-> This reference is for release v1.0.1-beta.1.
+> This reference is for release v1.0.2-beta.1.
 
 ## azctx
 

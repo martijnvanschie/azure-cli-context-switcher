@@ -13,7 +13,7 @@ It resolved to one of the following folders:
 
 ```json
 {
-  "Tenants": {},
+  "Tenants": [],
   "Users": {},
   "Contexts": {},
   "CurrentContext": ""
@@ -37,8 +37,19 @@ Tenant holds the information of the tenant the users wants to login to.
 
 | Field | Description | Type |
 | ------|-------------|------|
-| Name | The name of the tenant. | `string` |
-| TenantId | The Entra ID tenant, must provide when using service principals | `string` |
+| Name | The unique name of the tenant in the configuration. | `string` |
+| DirectoryName | The directory name of the tenant. Used as a display name. | `string` |
+| TenantId | The Entra ID tenant, must provide when using service principals. Can contain either the ID or the domain of the tenant | `string` |
+
+Exmaple:
+
+```json
+{
+  "Name": "my-first-tenant",
+  "DirectoryName": "Directory name",
+  "TenantId": "123-456-789"
+}
+```
 
 ### User
 
