@@ -27,7 +27,7 @@ namespace Azure.Cli.ContextSwitcher.Commands.Config.Users
 
                     foreach (var item in content.Users)
                     {
-                        table.AddRow(item.Key, item.Value.DisplayName, item.Value.LoginType.ToString(), item.Value.Username ?? $"[{Color.Grey}]n.a.[/]");
+                        table.AddRow(item.Name, item.Name, item.LoginType.ToString(), item.Username ?? $"[{Color.Grey}]n.a.[/]");
                     }
 
                     // Render the table to the console

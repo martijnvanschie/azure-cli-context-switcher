@@ -43,7 +43,7 @@ namespace Azure.Cli.ContextSwitcher.Commands.Contexts
 
                 try
                 {
-                    PerformLogin(currentContext);
+                    AzureCliContext.PerformLogin(currentContext, _config);
                     _config.CurrentContext = context;
                     AzureCliContextManager.WriteConfig(_config, configFile);
                     AnsiConsole.MarkupLine($"[{Color.Lime}]Context successfully set.[/]");
@@ -55,33 +55,6 @@ namespace Azure.Cli.ContextSwitcher.Commands.Contexts
                 }
             },
             _configFile);
-        }
-
-        private void PerformLogin(Context currentContext)
-        {
-            var tenant = _config.Tenants.FirstOrDefault(t => t.Name.Equals(currentContext.Tenant));
-
-            if (tenant == null)
-            {
-                throw new ContextConfigurationException("");
-            }
-
-            var user = _config.Users[currentContext.User];
-
-            switch (user.LoginType)
-            {
-                case LoginType.Interactive:
-                    Utilities.LoginInteractive(tenant);
-                    break;
-                case LoginType.ServicePrincipal:
-                    Utilities.LoginServicePrincipal(tenant, user);
-                    break;
-                case LoginType.UsernamePassword:
-                    Utilities.LoginUsernamePassword(tenant, user);
-                    break;
-                default:
-                    break;
-            }
         }
     }
 }

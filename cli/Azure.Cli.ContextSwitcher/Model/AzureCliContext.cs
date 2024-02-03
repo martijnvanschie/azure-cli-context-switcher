@@ -1,10 +1,12 @@
-﻿namespace Azure.Cli.ContextSwitcher.Model
+﻿using Azure.Cli.ContextSwitcher.Helpers;
+
+namespace Azure.Cli.ContextSwitcher.Model
 {
     internal class AzureCliContext
     {
         public List<Tenant> Tenants { get; set; } = new List<Tenant>();
 
-        public Dictionary<string, User> Users { get; set; } = new Dictionary<string, User>();
+        public List<User> Users { get; set; } = new List<User>();
 
         public Dictionary<string, Context> Contexts { get; set; } = new Dictionary<string, Context>();
 
@@ -29,7 +31,7 @@
         public void AddUser(string name, LoginType type = LoginType.Interactive, string? friendlyName = null, string? username = null, string? password = null)
         {
             var key = name.ToLower().Replace(" ", "-");
-            if (Users.ContainsKey(key))
+            if (Users.Any(t => t.Name.Equals(key)))
             {
                 throw new ContextConfigurationException($"A user with the key [{key}] is already configured. Duplicate key names not supported.");
             }
@@ -37,11 +39,11 @@
             switch (type)
             {
                 case LoginType.Interactive:
-                    Users.Add(key, new User(friendlyName ?? name));
+                    Users.Add(new User(key));
                     break;
                 case LoginType.ServicePrincipal:
                 case LoginType.UsernamePassword:
-                    Users.Add(key, new User(friendlyName ?? name, type, username!, password!));
+                    Users.Add(new User(key, type, username!, password!));
                     break;
                 default:
                     break;
@@ -81,6 +83,36 @@
         public static AzureCliContext CreateDefault()
         {
             return new AzureCliContext();
+        }
+
+        internal static void PerformLogin(Context currentContext, AzureCliContext _config)
+        {
+            var tenant = _config.Tenants.FirstOrDefault(t => t.Name.Equals(currentContext.Tenant));
+            if (tenant == null)
+            {
+                throw new ContextConfigurationException($"Invalid configuration for context [{currentContext}]. No tenant found in configuration that matched the name [{currentContext.Tenant}].");
+            }
+
+            var user = _config.Users.FirstOrDefault(u => u.Name.Equals(currentContext.User));
+            if (user == null)
+            {
+                throw new ContextConfigurationException($"Invalid configuration for context [{currentContext}]. No user found in configuration that matched the name [{currentContext.User}].");
+            }
+
+            switch (user.LoginType)
+            {
+                case LoginType.Interactive:
+                    Utilities.LoginInteractive(tenant);
+                    break;
+                case LoginType.ServicePrincipal:
+                    Utilities.LoginServicePrincipal(tenant, user);
+                    break;
+                case LoginType.UsernamePassword:
+                    Utilities.LoginUsernamePassword(tenant, user);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
