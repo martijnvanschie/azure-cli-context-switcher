@@ -59,9 +59,11 @@ namespace Azure.Cli.ContextSwitcher.Commands.Contexts
 
                     table.AddEmptyRow();
 
-                    if (_config.Users.TryGetValue(currentContext.User, out User? user))
+                    var user = _config.Users.FirstOrDefault(t => t.Name.Equals(currentContext.User));
+
+                    if (user is not null)
                     {
-                        table.AddRow("User displayname", user.DisplayName);
+                        table.AddRow("User displayname", user.Name);
                         table.AddRow("Logintype", user.LoginType.ToString());
                         table.AddRow("Username", user.Username ?? $"[{Color.Grey}]n.a.[/]");
                         table.AddRow("Password", string.IsNullOrEmpty(user.Password) ? $"[{Color.Grey}]n.a.[/]" : "**************");

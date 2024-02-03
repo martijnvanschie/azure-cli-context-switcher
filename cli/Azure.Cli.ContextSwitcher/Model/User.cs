@@ -11,22 +11,24 @@ namespace Azure.Cli.ContextSwitcher.Model
         }
 
         /// <summary>
-        /// Creates a new instance of a User with a LoginType Interactive
+        /// Creates a new instance of a User with an Interactive LoginType
         /// </summary>
         /// <param name="name"></param>
-        public User(string name)
+        public User(string name, string? description = null)
         {
-            DisplayName = name;
+            Name = name;
             LoginType = LoginType.Interactive;
+            Description = description;
         }
 
         /// <summary>
         /// Creates a new instance of a User with a specific LoginType
         /// </summary>
         /// <param name="name"></param>
-        public User(string name, LoginType loginType, string username, string passwword)
+        public User(string name, LoginType loginType, string username, string passwword, string? description = null)
         {
-            DisplayName = name;
+            Name = name;
+            Description = description;
             LoginType = loginType;
 
             if (loginType != LoginType.Interactive)
@@ -41,7 +43,9 @@ namespace Azure.Cli.ContextSwitcher.Model
             }
         }
 
-        public string DisplayName { get; init; } = string.Empty;
+        public string Name { get; init; } = string.Empty;
+
+        public string? Description { get; init; }
 
         [JsonConverter(typeof(LoginTypeConverter))]
         public LoginType LoginType { get; set; }
